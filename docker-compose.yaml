@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  kms:
+    build:
+      target: kms
+    cap_add:
+      - IPC_LOCK
+    command:
+      server

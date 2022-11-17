@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  kms:
+    volumes:
+    - "/fs/d1/services/kms/data:/vault/file"
+    - "/fs/d1/services/kms/certs:/certs:ro"
+    - "/fs/d1/services/kms/keys:/keys:ro"
+    environment:
+      VAULT_ADDR: https://kms.OST.BENCRANNICH.NET/
+      VAULT_CACERT: /certs/roots.fullchain.pem
+      VAULT_LOCAL_CONFIG: '{"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h", "listener":{"tcp":{"address":"0.0.0.0:443","tls_cert_file":"/certs/kms.fullchain.pem","tls_key_file":"/keys/kms.key.pem"}},"ui":true}'
+    ports:
+    - "192.168.100.16:443:443/tcp"
